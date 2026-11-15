@@ -124,6 +124,18 @@ import {
   split,
   threshold,
 } from './operations/index.ts';
+import type {
+  MultiplyBlendOptions,
+  ScaleChannelsOptions,
+  ScreenBlendOptions,
+  StampOptions,
+} from './retouch/index.ts';
+import {
+  multiplyBlend,
+  scaleChannels,
+  screenBlend,
+  stamp,
+} from './retouch/index.ts';
 import type { ImageColorModel } from './utils/constants/colorModels.ts';
 import { colorModels } from './utils/constants/colorModels.ts';
 import { getMinMax } from './utils/getMinMax.ts';
@@ -908,6 +920,46 @@ export class Image {
 
   public copyTo(target: Image, options: CopyToOptions<Image> = {}): Image {
     return copyTo(this, target, options);
+  }
+
+  /**
+   * Multiply blend mode (正片叠底): lay a palette on this image.
+   * @param palette - Image laid on top of this image.
+   * @param options - Blend options.
+   * @returns The blended image.
+   */
+  public multiplyBlend(palette: Image, options?: MultiplyBlendOptions): Image {
+    return multiplyBlend(this, palette, options);
+  }
+
+  /**
+   * Screen blend mode (滤色): lay a palette on this image.
+   * @param palette - Image laid on top of this image.
+   * @param options - Blend options.
+   * @returns The blended image.
+   */
+  public screenBlend(palette: Image, options?: ScreenBlendOptions): Image {
+    return screenBlend(this, palette, options);
+  }
+
+  /**
+   * Direct stamp (直接盖章): stamp a palette on this image.
+   * @param palette - Image stamped on top of this image.
+   * @param options - Stamp options.
+   * @returns The stamped image.
+   */
+  public stamp(palette: Image, options?: StampOptions): Image {
+    return stamp(this, palette, options);
+  }
+
+  /**
+   * Scale selected channels by a constant factor, clamped to the image range.
+   * @param factor - Multiplication factor.
+   * @param options - Scale options.
+   * @returns The scaled image.
+   */
+  public scaleChannels(factor: number, options?: ScaleChannelsOptions): Image {
+    return scaleChannels(this, factor, options);
   }
 
   public threshold(options: ThresholdOptions = {}): Mask {

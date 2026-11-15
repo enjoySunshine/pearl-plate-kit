@@ -15,6 +15,7 @@ export * from './morphology/index.ts';
 export * from './operations/index.ts';
 export * from './roi/index.ts';
 export * from './save/index.ts';
+export * from './retouch/index.ts';
 export * from './Stack.ts';
 export { decodeStack } from './stack/load/decodeStack.ts';
 export * from './utils/utils.types.ts';
